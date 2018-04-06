@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import StageOne from '../../components/StageOne/StageOne';
 import StageTwo from '../../components/StageTwo/StageTwo';
+import StageThree from '../../components/StageThree/StageThree';
+import './Stage.css';
 
 class Stage extends Component {
 
@@ -20,28 +22,44 @@ class Stage extends Component {
     ],
     distance: {
       km: 0,
-      m: 0
+      m: 0,
+      calc: {
+        km: 0,
+        m: 0
+      }
     },
     tempo: {
       min: 0,
-      s: 0
+      s: 0,
+      calc: {
+        min: 0,
+        s: 0
+      }
     },
     speed: {
       seperate: 0,
-      hundredth: 0
+      hundredth: 0,
+      calc: {
+        seperate: 0,
+        hundredth: 0
+      }
     },
     time: {
       hours: 0,
       min: 0,
-      s: 0
+      s: 0,
+      calc: {
+        hours: 0,
+        min: 0,
+        s: 0
+      }
     }
   }
 
-  startersHandler = (parameter, event) => {
+  startersHandler = (parameter) => {
       let newParameters = {...this.state.starters.parameters};
       newParameters[parameter] = !this.state.starters.parameters[parameter];
       if (!this.state.starters.parameters[parameter] && this.state.starters.chosenParameters < 2){
-        event.currentTarget.classList.add("anchorClicked");
         this.setState({
           starters: {
             parameters: newParameters,
@@ -49,11 +67,12 @@ class Stage extends Component {
           }
         });
       } else if (this.state.starters.parameters[parameter]){
-        event.currentTarget.classList.remove("anchorClicked");
-        this.setState({
-          starters: {
-            parameters: newParameters,
-            chosenParameters: this.state.starters.chosenParameters - 1
+        this.setState((prevState,props) => {
+          return{
+            starters: {
+              parameters: newParameters,
+              chosenParameters: this.state.starters.chosenParameters - 1
+            }
           }
         });
       }
@@ -78,17 +97,18 @@ class Stage extends Component {
 
   changeValueHandler = (direction, parameter, subparameter) => {
     let newParameter = {...this.state[parameter]};
-    if (direction === "plus") newParameter[subparameter]++;
-    else if (direction === "minus" && newParameter[subparameter] > 0) newParameter[subparameter]--;
+    if (direction === "plus" && this.state.starters.parameters[parameter]) newParameter[subparameter]++;
+    else if (direction === "minus" && newParameter[subparameter] > 0 && this.state.starters.parameters[parameter]) newParameter[subparameter]--;
     this.setState({
       [parameter]: newParameter
-    })
+    });
   }
 
   render(){
 
     const presentStage = () => {
       if (this.state.stage[0]) return <StageOne
+                                      state={this.state}
                                       changeStage={this.changeStageHandler}
                                       chooseStarters={this.startersHandler}
                                       checkStarters={this.checkStartersHandler}/>;
@@ -96,15 +116,15 @@ class Stage extends Component {
                                       state={this.state}
                                       changeValue={this.changeValueHandler}
                                       changeStage={this.changeStageHandler}/>;
-      if (this.state.stage[2]) return (
-        <div>
-          "General Kenobi..."
-        </div>
-      );
+      if (this.state.stage[2]) return <StageThree
+                                      state={this.state}
+                                      changeValue={this.changeValueHandler}
+                                      changeStage={this.changeStageHandler}
+                                      chooseStarters={this.startersHandler}/>;
     }
 
     return (
-        <main>
+        <main className="Stage">
           {presentStage()}
         </main>
     );

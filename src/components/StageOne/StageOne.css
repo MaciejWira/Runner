@@ -1,7 +1,7 @@
-.StageOne .linksWrapper {
+.StageOne .links-wrapper {
   display: flex;
   justify-content: space-around; }
-  .StageOne .linksWrapper .anchor {
+  .StageOne .links-wrapper .anchor {
     display: inline-block;
     flex-basis: 150px;
     text-transform: uppercase;
@@ -11,8 +11,8 @@
     color: white;
     font-weight: 700;
     transition: all 0.2s; }
-    .StageOne .linksWrapper .anchor:hover {
+    .StageOne .links-wrapper .anchor:hover {
       cursor: pointer;
       background: #ec3f3f; }
-    .StageOne .linksWrapper .anchorClicked {
+    .StageOne .links-wrapper .anchor--clicked {
       background: green; }

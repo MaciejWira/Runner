@@ -24,7 +24,17 @@ const stageTwo = (props) => {
                                                           s={state.tempo.s}
                                                           sUp={props.changeValue.bind(this, "plus", "tempo", "s")}
                                                           sDown={props.changeValue.bind(this, "minus", "tempo", "s")}/>);
-  if (state.starters.parameters.time) stageTwoParameters.push(<Time key="time"/>);
+  if (state.starters.parameters.time) stageTwoParameters.push(<Time
+                                                              key="time"
+                                                              hours={state.time.hours}
+                                                              hoursUp={props.changeValue.bind(this, "plus", "time", "hours")}
+                                                              hoursDown={props.changeValue.bind(this, "minus", "time", "hours")}
+                                                              min={state.time.min}
+                                                              minUp={props.changeValue.bind(this, "plus", "time", "min")}
+                                                              minDown={props.changeValue.bind(this, "minus", "time", "min")}
+                                                              s={state.time.s}
+                                                              sUp={props.changeValue.bind(this, "plus", "time", "s")}
+                                                              sDown={props.changeValue.bind(this, "minus", "time", "s")}/>);
 
   return (
     <div>

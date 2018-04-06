@@ -1,5 +1,5 @@
 .StageOne {
-  .linksWrapper {
+  .links-wrapper {
     display: flex;
     justify-content: space-around;
     .anchor {
@@ -16,7 +16,7 @@
         cursor: pointer;
         background: #ec3f3f;
       }
-      &Clicked {
+      &--clicked {
         background: green;
       }
     }

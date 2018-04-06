@@ -8,10 +8,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <p>Komponent nawigacji</p>
-        <p>Komponent headera</p>
         <Stage />
-        <p>Komponent footera</p>
       </div>
     );
   }

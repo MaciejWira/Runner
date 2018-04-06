@@ -2,8 +2,13 @@ import React from 'react';
 import Card from '../Card/Card';
 
 const distance = (props) => {
+
+  let distanceClass = "";
+
+  if (props.locked) distanceClass = "locked"
+
   return(
-    <div>
+    <div className={distanceClass}>
       <h2>Wpisz prognozowany dystans</h2>
       <Card
         value={props.km}
@@ -13,6 +18,7 @@ const distance = (props) => {
         value={props.m}
         valueUp={props.mUp}
         valueDown={props.mDown}/>
+      <button onClick={props.changeStarters}>Wyłącz</button>
     </div>
   )
 };
