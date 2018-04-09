@@ -1,0 +1,21 @@
+.Card {
+  display: flex;
+  align-items: center;
+  text-transform: none; }
+  .Card--main {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    font-size: 3rem;
+    padding: 0 0.5rem; }
+    .Card--main button {
+      font-size: 1.3rem;
+      color: #52a500;
+      border: none;
+      background: none;
+      cursor: pointer;
+      padding: 0 0.5rem; }
+      .Card--main button:focus {
+        outline: none; }
+      .Card--main button:active {
+        color: #4ba4ff; }

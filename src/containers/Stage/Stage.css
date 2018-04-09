@@ -1,2 +1,29 @@
-.Stage .locked {
-  border: solid 2px red; }
+.Stage .padlock {
+  opacity: 0.3; }
+
+.Stage h2 {
+  display: inline-block;
+  font-size: 1.8rem;
+  font-weight: 400;
+  padding: 0.8rem;
+  border: solid 1px #52a500;
+  margin: 0.8rem; }
+
+.Stage h3 {
+  margin: 0.4rem; }
+
+.Stage p {
+  margin: 0.4rem; }
+
+.Stage .button-continue {
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 400;
+  padding: 0.3rem 0.7rem;
+  margin: 1rem;
+  background: grey;
+  transition: all 0.2s; }
+  .Stage .button-continue:hover {
+    cursor: pointer;
+    background: #4ba4ff; }

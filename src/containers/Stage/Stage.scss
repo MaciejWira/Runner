@@ -1,5 +1,35 @@
+@import '../../scss/helpers.scss';
+
 .Stage {
-  .locked {
-    border: solid 2px red;
+  .padlock {
+    opacity: 0.3
+  }
+  h2 {
+    display: inline-block;
+    font-size: 1.8rem;
+    font-weight: 400;
+    padding: 0.8rem;
+    border: solid 1px $green1;
+    margin: 0.8rem;
+  }
+  h3 {
+    margin: 0.4rem;
+  }
+  p {
+    margin: 0.4rem;
+  }
+  .button-continue {
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 400;
+    padding: 0.3rem 0.7rem;
+    margin: 1rem;
+    background: $grey;
+    transition: all 0.2s;
+    &:hover {
+      cursor: pointer;
+      background: $blue0;
+    }
   }
 }

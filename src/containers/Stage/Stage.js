@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import StageOne from '../../components/StageOne/StageOne';
-import StageTwo from '../../components/StageTwo/StageTwo';
-import StageThree from '../../components/StageThree/StageThree';
+import StageOne from '../../components/Stages/StageOne/StageOne';
+import StageTwo from '../../components/Stages/StageTwo/StageTwo';
+import StageThree from '../../components/Stages/StageThree/StageThree';
 import './Stage.css';
 
 class Stage extends Component {
@@ -22,37 +22,20 @@ class Stage extends Component {
     ],
     distance: {
       km: 0,
-      m: 0,
-      calc: {
-        km: 0,
-        m: 0
-      }
+      m: 0
     },
     tempo: {
       min: 0,
-      s: 0,
-      calc: {
-        min: 0,
-        s: 0
-      }
+      s: 0
     },
     speed: {
       seperate: 0,
-      hundredth: 0,
-      calc: {
-        seperate: 0,
-        hundredth: 0
-      }
+      hundredth: 0
     },
     time: {
       hours: 0,
       min: 0,
-      s: 0,
-      calc: {
-        hours: 0,
-        min: 0,
-        s: 0
-      }
+      s: 0
     }
   }
 
@@ -60,18 +43,20 @@ class Stage extends Component {
       let newParameters = {...this.state.starters.parameters};
       newParameters[parameter] = !this.state.starters.parameters[parameter];
       if (!this.state.starters.parameters[parameter] && this.state.starters.chosenParameters < 2){
-        this.setState({
-          starters: {
-            parameters: newParameters,
-            chosenParameters: this.state.starters.chosenParameters + 1
+        this.setState((prevState,props) => {
+          return {
+            starters: {
+              parameters: newParameters,
+              chosenParameters: prevState.starters.chosenParameters + 1
+            }
           }
         });
       } else if (this.state.starters.parameters[parameter]){
         this.setState((prevState,props) => {
-          return{
+          return {
             starters: {
               parameters: newParameters,
-              chosenParameters: this.state.starters.chosenParameters - 1
+              chosenParameters: prevState.starters.chosenParameters - 1
             }
           }
         });
@@ -80,7 +65,9 @@ class Stage extends Component {
 
   checkStartersHandler = () => {
     if (this.state.starters.chosenParameters === 2) this.changeStageHandler();
-    else alert("Za mało!")
+    else {
+      this.props.showAlert("Za mało parametrów. Wybierz 2 z 3.");
+    }
   }
 
   changeStageHandler = () => {
@@ -96,12 +83,47 @@ class Stage extends Component {
   }
 
   changeValueHandler = (direction, parameter, subparameter) => {
-    let newParameter = {...this.state[parameter]};
-    if (direction === "plus" && this.state.starters.parameters[parameter]) newParameter[subparameter]++;
-    else if (direction === "minus" && newParameter[subparameter] > 0 && this.state.starters.parameters[parameter]) newParameter[subparameter]--;
-    this.setState({
-      [parameter]: newParameter
-    });
+    if (this.state.starters.chosenParameters === 2){
+
+      let newState = {...this.state};
+      if (direction === "plus"
+          && newState.starters.parameters[parameter]) newState[parameter][subparameter]++;
+      else if (direction === "minus"
+              && newState[parameter][subparameter] > 0
+              && newState.starters.parameters[parameter]) newState[parameter][subparameter]--;
+
+      const time = newState.time.s + (60 * newState.time.min) + (3600 * newState.time.hours),
+            distance = newState.distance.m + (1000 * newState.distance.km),
+            tempo = (newState.tempo.s + (60 * newState.tempo.min)) / 1000;
+
+        if (!newState.starters.parameters.distance){
+          const showDistance = time / tempo;
+          newState.distance.km = Math.floor(showDistance / 1000);
+          newState.distance.m = Math.floor(showDistance % 1000);
+        }
+
+        if (!newState.starters.parameters.tempo){
+          const showTempo = time / (distance / 1000);
+          newState.tempo.min = Math.floor(showTempo / 60);
+          newState.tempo.s = Math.floor(showTempo % 60);
+        }
+
+        if (!newState.starters.parameters.time){
+          const showTime = distance * tempo;
+          newState.time.hours = Math.floor(showTime / 3600);
+          newState.time.min = Math.floor((showTime % 3600) / 60);
+          newState.time.s = Math.floor((showTime % 3600) % 60);
+        }
+
+      this.setState({
+        distance: newState.distance,
+        tempo: newState.tempo,
+        speed: newState.speed,
+        time: newState.time
+      });
+    } else {
+      alert("Za mało parametrów!")
+    }
   }
 
   render(){

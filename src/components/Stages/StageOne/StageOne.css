@@ -1,0 +1,28 @@
+.StageOne .links-wrapper {
+  display: flex;
+  margin: auto;
+  justify-content: space-around;
+  max-width: 600px; }
+  .StageOne .links-wrapper .anchor {
+    display: inline-block;
+    border-radius: 1.5rem;
+    font-size: 1.5rem;
+    flex-basis: 150px;
+    text-transform: uppercase;
+    padding: 0.8rem;
+    margin: 1rem 0.8rem;
+    color: #ff4ba4;
+    border: solid 1px grey;
+    transition: all 0.2s; }
+    .StageOne .links-wrapper .anchor:hover {
+      cursor: pointer;
+      color: #4ba4ff;
+      border: solid 1px #0052a5; }
+    .StageOne .links-wrapper .anchor--clicked {
+      color: #52a500;
+      border: solid 1px #366e00; }
+      .StageOne .links-wrapper .anchor--clicked .padlock {
+        opacity: 1; }
+  .StageOne .links-wrapper i {
+    display: block;
+    margin: 5px; }

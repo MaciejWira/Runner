@@ -1,0 +1,31 @@
+@import '../../../scss/helpers.scss';
+
+.Card {
+    display: flex;
+    align-items: center;
+    text-transform: none;
+    &--main {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        font-size: 3rem;
+        padding: 0 0.5rem;
+        button {
+          font-size: 1.3rem;
+          color: $green1;
+          border: none;
+          background: none;
+          cursor: pointer;
+          padding: 0 0.5rem;
+          &:focus {
+              outline: none;
+          }
+          &:active {
+              color: $blue0;
+          }
+        }
+        span {
+
+        }
+    }    
+} 

@@ -1,0 +1,21 @@
+.Panel {
+  border-radius: 1.5rem;
+  flex-basis: 250px;
+  text-transform: uppercase;
+  padding: 0.8rem;
+  margin: 1rem 0.8rem;
+  border: solid 1px grey;
+  transition: all 0.2s; }
+  .Panel h3 {
+    font-size: 1.5rem;
+    color: #ff4ba4; }
+  .Panel .button {
+    display: none; }
+  .Panel .show {
+    display: block; }
+  .Panel .card-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+  .Panel .units {
+    margin-right: 0.5rem; }

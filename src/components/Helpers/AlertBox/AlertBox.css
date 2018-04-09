@@ -1,0 +1,26 @@
+.AlertBox {
+  background: rgba(255, 255, 255, 0.7);
+  opacity: 0;
+  overflow: hidden;
+  position: fixed;
+  z-index: 1001;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  transition: all 0.2s; }
+  .AlertBox .message {
+    background: rgba(255, 255, 255, 0.7);
+    position: relative;
+    top: -200px;
+    padding: 1rem;
+    display: inline-block;
+    text-transform: uppercase;
+    margin: auto;
+    border: solid 1px #a50052;
+    transition: all 0.5s; }
+    .AlertBox .message--show {
+      top: 40px; }
+  .AlertBox--show {
+    opacity: 1;
+    height: 100%; }
