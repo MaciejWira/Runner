@@ -1,13 +1,17 @@
 .Card {
+  color: grey;
   display: flex;
   align-items: center;
   text-transform: none; }
   .Card--main {
+    color: #4ba4ff;
     display: flex;
     flex-flow: column;
     align-items: center;
     font-size: 3rem;
     padding: 0 0.5rem; }
+    .Card--main--unlocked {
+      color: grey; }
     .Card--main button {
       font-size: 1.3rem;
       color: #52a500;

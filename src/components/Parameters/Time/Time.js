@@ -4,37 +4,26 @@ import Panel from '../../Helpers/Panel/Panel';
 
 const time = (props) => {
 
-  const state = props.state;
-
-  const padlock = (parameter) => {
-    if (!state.starters.parameters[parameter]){
-      return "fas fa-lock-open padlock"
-    } else {
-      return "fas fa-lock padlock"
-    }
-  }
-    
   return(
     <Panel
-      locked={props.locked}
-      changeStarters={props.changeStarters}
-      panelTitle={props.title}
-      stageThree={props.stageThree}
-      padlockClass={padlock("time")}>
+      parameter="time"
+      state={props.state}
+      chooseStarters={props.chooseStarters}
+      panelTitle={props.title}>
       <Card
-        value={props.hours}
-        valueUp={props.hoursUp}
-        valueDown={props.hoursDown}
+        value={props.state.time.hours}
+        valueUp={props.changeValue.bind(this, "plus", "time", "hours")}
+        valueDown={props.changeValue.bind(this, "minus", "time", "hours")}
         unit="h"/>
       <Card
-        value={props.min}
-        valueUp={props.minUp}
-        valueDown={props.minDown}
+        value={props.state.time.min}
+        valueUp={props.changeValue.bind(this, "plus", "time", "min")}
+        valueDown={props.changeValue.bind(this, "minus", "time", "min")}
         unit="min"/>
       <Card
-        value={props.s}
-        valueUp={props.sUp}
-        valueDown={props.sDown}
+        value={props.state.time.s}
+        valueUp={props.changeValue.bind(this, "plus", "time", "s")}
+        valueDown={props.changeValue.bind(this, "minus", "time", "s")}
         unit="s"/>
     </Panel>
   );

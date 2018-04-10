@@ -1,15 +1,20 @@
 @import '../../../scss/helpers.scss';
 
 .Card {
+    color: $grey;       
     display: flex;
     align-items: center;
     text-transform: none;
     &--main {
+        color: $blue0;         
         display: flex;
         flex-flow: column;
         align-items: center;
         font-size: 3rem;
         padding: 0 0.5rem;
+        &--unlocked {
+            color: $grey
+        }
         button {
           font-size: 1.3rem;
           color: $green1;

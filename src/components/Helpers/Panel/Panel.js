@@ -1,13 +1,22 @@
 import React from 'react';
+import Padlock from '../Padlock/Padlock';
 import './Panel.css';
 
 const panel = (props) => {
 
-  let panelClass = "Panel",
-      buttonClass ="button";
+  let padlock = (<a onClick={props.chooseStarters.bind(this,props.parameter)}>
+                    <Padlock
+                      parameter={props.parameter}
+                      state={props.state}
+                      chooseStarters={props.chooseStarters}/>
+                  </a>);
 
-  if (props.locked) panelClass += " locked";
-  if (props.stageThree) buttonClass += " show";
+  if (props.state.stage[1]){
+    padlock = null
+  };
+
+  let panelClass = "Panel";
+  if (!props.state.starters.parameters[props.parameter]) panelClass = "Panel Panel--locked"
 
   return(
     <div className={panelClass}>
@@ -15,9 +24,7 @@ const panel = (props) => {
       <div className="card-wrapper">
         {props.children}
       </div>
-      <a onClick={props.changeStarters}>
-        <i className={props.padlockClass}></i></a>
-      <button className={buttonClass} onClick={props.changeStarters}>PRZEŁĄCZ</button>
+      {padlock}
     </div>
   )
 };

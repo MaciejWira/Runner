@@ -9,7 +9,6 @@
     .anchor {
       display: inline-block;
       border-radius: 1.5rem;
-      font-size: 1.5rem;
       flex-basis: 150px;
       text-transform: uppercase;
       padding: 0.8rem;
@@ -25,14 +24,7 @@
       &--clicked {
         color: $green1;
         border: solid 1px $green2;
-        .padlock {
-          opacity: 1;
-        }
       }
-    }
-    i {
-      display: block;
-      margin: 5px;
     }
   }
 }

@@ -4,32 +4,21 @@ import Panel from '../../Helpers/Panel/Panel';
 
 const distance = (props) => {
 
-  const state = props.state;
-
-  const padlock = (parameter) => {
-    if (!state.starters.parameters[parameter]){
-      return "fas fa-lock-open padlock"
-    } else {
-      return "fas fa-lock padlock"
-    }
-  }
-
   return (
     <Panel
-      locked={props.locked}
-      changeStarters={props.changeStarters}
-      panelTitle={props.title}
-      stageThree={props.stageThree}
-      padlockClass={padlock("distance")}>
+      parameter="distance"
+      state={props.state}
+      chooseStarters={props.chooseStarters}
+      panelTitle={props.title}>
       <Card
-        value={props.km}
-        valueUp={props.kmUp}
-        valueDown={props.kmDown}
+        value={props.state.distance.km}
+        valueUp={props.changeValue.bind(this, "plus", "distance", "km")}
+        valueDown={props.changeValue.bind(this, "minus", "distance", "km")}
         unit="km"/>
       <Card
-        value={props.m}
-        valueUp={props.mUp}
-        valueDown={props.mDown}
+        value={props.state.distance.m}
+        valueUp={props.changeValue.bind(this, "plus", "distance", "m")}
+        valueDown={props.changeValue.bind(this, "plus", "distance", "m")}
         unit="m"/>
     </Panel>
   )

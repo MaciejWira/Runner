@@ -6,7 +6,6 @@
   .StageOne .links-wrapper .anchor {
     display: inline-block;
     border-radius: 1.5rem;
-    font-size: 1.5rem;
     flex-basis: 150px;
     text-transform: uppercase;
     padding: 0.8rem;
@@ -21,8 +20,3 @@
     .StageOne .links-wrapper .anchor--clicked {
       color: #52a500;
       border: solid 1px #366e00; }
-      .StageOne .links-wrapper .anchor--clicked .padlock {
-        opacity: 1; }
-  .StageOne .links-wrapper i {
-    display: block;
-    margin: 5px; }

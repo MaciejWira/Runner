@@ -13,43 +13,37 @@ const stageTwo = (props) => {
     <Distance
       key="distance"
       title="Dystans"
-      km={state.distance.km}
-      kmUp={props.changeValue.bind(this, "plus", "distance", "km")}
-      kmDown={props.changeValue.bind(this, "minus", "distance", "km")}
-      m={state.distance.m}
-      mUp={props.changeValue.bind(this, "plus", "distance", "m")}
-      mDown={props.changeValue.bind(this, "minus", "distance", "m")}/>);
+      state={props.state}
+      changeValue={props.changeValue}
+      changeStage={props.changeStage}
+      chooseStarters={props.chooseStarters}/>);
   if (state.starters.parameters.tempo) stageTwoParameters.push(
     <Tempo
       key="tempo"
       title="Tempo"
-      min={state.tempo.min}
-      minUp={props.changeValue.bind(this, "plus", "tempo", "min")}
-      minDown={props.changeValue.bind(this, "minus", "tempo", "min")}
-      s={state.tempo.s}
-      sUp={props.changeValue.bind(this, "plus", "tempo", "s")}
-      sDown={props.changeValue.bind(this, "minus", "tempo", "s")}/>);
+      state={props.state}
+      changeValue={props.changeValue}
+      changeStage={props.changeStage}
+      chooseStarters={props.chooseStarters}/>);
   if (state.starters.parameters.time) stageTwoParameters.push(
     <Time
       key="time"
       title="Czas"
-      hours={state.time.hours}
-      hoursUp={props.changeValue.bind(this, "plus", "time", "hours")}
-      hoursDown={props.changeValue.bind(this, "minus", "time", "hours")}
-      min={state.time.min}
-      minUp={props.changeValue.bind(this, "plus", "time", "min")}
-      minDown={props.changeValue.bind(this, "minus", "time", "min")}
-      s={state.time.s}
-      sUp={props.changeValue.bind(this, "plus", "time", "s")}
-      sDown={props.changeValue.bind(this, "minus", "time", "s")}/>);
+      state={props.state}
+      changeValue={props.changeValue}
+      changeStage={props.changeStage}
+      chooseStarters={props.chooseStarters}/>);
 
   return (
     <div className="StageTwo">
+      <h2>KROK 2 z 3</h2>
+      <p>Dokonaj wstępnych założeń<br/>
+      (będziesz mógł je później modyfikować)</p>
       <div className="panel-wrapper">
         {stageTwoParameters}
       </div>
-      <button onClick={props.changeStage} className="button-continue">WRÓĆ</button>
-      <button onClick={props.changeStage} className="button-continue">DALEJ</button>
+      <button onClick={props.changeStage.bind(this, "back")} className="button-continue">WRÓĆ</button>
+      <button onClick={props.changeStage.bind(this, "forward")} className="button-continue">DALEJ</button>
     </div>
   );
 
