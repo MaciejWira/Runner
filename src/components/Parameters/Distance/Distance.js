@@ -18,7 +18,7 @@ const distance = (props) => {
       <Card
         value={props.state.distance.m}
         valueUp={props.changeValue.bind(this, "plus", "distance", "m")}
-        valueDown={props.changeValue.bind(this, "plus", "distance", "m")}
+        valueDown={props.changeValue.bind(this, "minus", "distance", "m")}
         unit="m"/>
     </Panel>
   )

@@ -3,6 +3,9 @@
 .StageTwo {
     .panel-wrapper {
         display: flex;
-        justify-content: center
+        justify-content: center;
+        @include bp(small){
+          flex-wrap: wrap;
+        }        
     }
 }

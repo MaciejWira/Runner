@@ -13,13 +13,20 @@
     .Card--main--unlocked {
       color: grey; }
     .Card--main button {
-      font-size: 1.3rem;
       color: #52a500;
       border: none;
       background: none;
       cursor: pointer;
       padding: 0 0.5rem; }
+      .Card--main button i {
+        font-size: 1.5rem; }
+        @media only screen and (max-width: 600px) {
+          .Card--main button i {
+            font-size: 2rem; } }
       .Card--main button:focus {
         outline: none; }
       .Card--main button:active {
         color: #4ba4ff; }
+    @media only screen and (max-width: 600px) {
+      .Card--main {
+        font-size: 2rem; } }

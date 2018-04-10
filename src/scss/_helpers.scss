@@ -14,3 +14,29 @@ $pink4: #420021;
 $blue4: #002142;
 $green4: #214200;
 $grey: grey;
+
+// Mixins
+
+@mixin bp($size){
+  @if $size == huge {
+    @media only screen and (min-width: 1500px) {@content}
+  }
+  @else if $size == super-big {
+    @media only screen and (max-width: 1499px) {@content}
+  }
+  @else if $size == big {
+    @media only screen and (max-width: 1200px) {@content}
+  }
+  @else if $size == medium {
+    @media only screen and (max-width: 900px) {@content}
+  }
+  @else if $size == small {
+    @media only screen and (max-width: 600px) {@content}
+  }
+  @else if $size == super-small {
+    @media only screen and (max-width: 300px) {@content}
+  }
+  @else {
+    @media only screen and (max-width: $size){@content}
+  }
+}

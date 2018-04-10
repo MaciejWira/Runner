@@ -16,12 +16,17 @@
             color: $grey
         }
         button {
-          font-size: 1.3rem;
           color: $green1;
           border: none;
           background: none;
           cursor: pointer;
           padding: 0 0.5rem;
+          i {
+            font-size: 1.5rem;  
+            @include bp(small){
+                font-size: 2rem;   
+            }            
+          }
           &:focus {
               outline: none;
           }
@@ -29,8 +34,8 @@
               color: $blue0;
           }
         }
-        span {
-
-        }
+        @include bp(small){
+            font-size: 2rem;
+        }   
     }    
 } 

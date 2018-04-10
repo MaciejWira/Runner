@@ -7,7 +7,6 @@
     justify-content: space-around;
     max-width: 600px;
     .anchor {
-      display: inline-block;
       border-radius: 1.5rem;
       flex-basis: 150px;
       text-transform: uppercase;
@@ -25,6 +24,9 @@
         color: $green1;
         border: solid 1px $green2;
       }
+    }
+    @include bp(small){
+      flex-wrap: wrap;
     }
   }
 }

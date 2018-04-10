@@ -131,61 +131,100 @@ class Stage extends Component {
   }
 
   changeValueHandler = (direction, parameter, subparameter) => {
+
+    let newState = JSON.parse(JSON.stringify(this.state));
+
     if (this.state.starters.chosenParameters === 2 && this.state.starters.parameters[parameter]){
 
-      const limits = (param, subparam, limit) => {
-        if (newState[param][subparam] === limit) newState[param][subparam] = limit - 1;
+      const limits = () => {
+        if (newState.distance.m < 1000
+            && newState.tempo.s < 60
+            && newState.time.min < 60
+            && newState.time.s < 60) {
+              return true
+            } else return false
       }
 
-      let newState = {...this.state};
       if (direction === "plus"
-          && newState.starters.parameters[parameter]
-          && newState.distance.m < 1000
-          && newState.tempo.min < 45
-          && newState.tempo.s < 60
-          && newState.time.min < 60
-          && newState.time.s < 60) {
-            if (subparameter === "m") newState[parameter][subparameter] += 25;
+          && newState.starters.parameters[parameter]) {
+            if (subparameter === "m") newState[parameter][subparameter] += 10;
             else newState[parameter][subparameter]++;
-            limits("distance","m",1000);
-            limits("tempo","min",45);
-            limits("tempo","s",60);
-            limits("time","min",60);
-            limits("time","s",60);
+      } else if (direction === "minus"
+                  && newState[parameter][subparameter] > 0
+                  && newState.starters.parameters[parameter]){
+                if (subparameter === "m") {
+                  if (newState.distance.m < 10) newState.distance.m = 0;
+                  else newState.distance.m -= 10;
+                }
+                else newState[parameter][subparameter]--;
+      }
+
+      if (limits()
+          && !(!newState.starters.parameters.tempo
+              && newState.distance.m === 0
+              && newState.distance.km === 0
+              && (newState.time.hours > 0
+                || newState.time.min > 0
+                || newState.time.s > 0))
+          && !(!newState.starters.parameters.distance
+              && newState.tempo.min === 0
+              && newState.tempo.s === 0
+              && (newState.time.hours > 0
+                || newState.time.min > 0
+                || newState.time.s > 0))
+            ){
+
+        const time = newState.time.s + (60 * newState.time.min) + (3600 * newState.time.hours),
+              distance = newState.distance.m + (1000 * newState.distance.km),
+              tempo = (newState.tempo.s + (60 * newState.tempo.min)) / 1000;
+
+          if (!newState.starters.parameters.distance){
+            const showDistance = time / tempo;
+            newState.distance.km = Math.floor(showDistance / 1000);
+            newState.distance.m = Math.floor(showDistance % 1000);
           }
-      else if (direction === "minus"
-              && newState[parameter][subparameter] > 0
-              && newState.starters.parameters[parameter]) newState[parameter][subparameter]--;
 
-      const time = newState.time.s + (60 * newState.time.min) + (3600 * newState.time.hours),
-            distance = newState.distance.m + (1000 * newState.distance.km),
-            tempo = (newState.tempo.s + (60 * newState.tempo.min)) / 1000;
+          if (!newState.starters.parameters.tempo){
+            const showTempo = time / (distance / 1000);
+            newState.tempo.min = Math.floor(showTempo / 60);
+            newState.tempo.s = Math.floor(showTempo % 60);
+          }
 
-        if (!newState.starters.parameters.distance){
-          const showDistance = time / tempo;
-          newState.distance.km = Math.floor(showDistance / 1000);
-          newState.distance.m = Math.floor(showDistance % 1000);
-        }
+          if (!newState.starters.parameters.time){
+            const showTime = distance * tempo;
+            newState.time.hours = Math.floor(showTime / 3600);
+            newState.time.min = Math.floor((showTime % 3600) / 60);
+            newState.time.s = Math.floor((showTime % 3600) % 60);
+          }
 
-        if (!newState.starters.parameters.tempo){
-          const showTempo = time / (distance / 1000);
-          newState.tempo.min = Math.floor(showTempo / 60);
-          newState.tempo.s = Math.floor(showTempo % 60);
-        }
+          for (let key in newState){
+            for (let subkey in newState[key]){
+              if (isNaN(newState[key][subkey])) newState[key][subkey] = 0;
+            }
+          }
 
-        if (!newState.starters.parameters.time){
-          const showTime = distance * tempo;
-          newState.time.hours = Math.floor(showTime / 3600);
-          newState.time.min = Math.floor((showTime % 3600) / 60);
-          newState.time.s = Math.floor((showTime % 3600) % 60);
-        }
+          this.setState({
+            distance: newState.distance,
+            tempo: newState.tempo,
+            speed: newState.speed,
+            time: newState.time
+          });
+      } else if (!newState.starters.parameters.tempo
+                  && newState.distance.m === 0
+                  && newState.distance.km === 0
+                  && (newState.time.hours > 0
+                    || newState.time.min > 0
+                    || newState.time.s > 0)){
+        this.props.showAlert("Przy parametrze 'Dystans' równym 0, 'Czas' nie może być większy od 0. Zacznij od modyfikacji parametru 'Dystans'.")
+      } else if (!newState.starters.parameters.distance
+                  && newState.tempo.min === 0
+                  && newState.tempo.s === 0
+                  && (newState.time.hours > 0
+                    || newState.time.min > 0
+                    || newState.time.s > 0)){
+        this.props.showAlert("Przy parametrze 'Tempo' równym 0, 'Czas' nie może być większy od 0! Zacznij od modyfikacji parametru 'Tempo'.")
+      }
 
-      this.setState({
-        distance: newState.distance,
-        tempo: newState.tempo,
-        speed: newState.speed,
-        time: newState.time
-      });
     } else if (this.state.starters.chosenParameters === 2 && !this.state.starters.parameters[parameter]){
      this.props.showAlert("Aby móc zmieniać ten parametr, wyłącz jeden z pozostałych.")
    }

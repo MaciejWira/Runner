@@ -4,7 +4,6 @@
   justify-content: space-around;
   max-width: 600px; }
   .StageOne .links-wrapper .anchor {
-    display: inline-block;
     border-radius: 1.5rem;
     flex-basis: 150px;
     text-transform: uppercase;
@@ -20,3 +19,6 @@
     .StageOne .links-wrapper .anchor--clicked {
       color: #52a500;
       border: solid 1px #366e00; }
+  @media only screen and (max-width: 600px) {
+    .StageOne .links-wrapper {
+      flex-wrap: wrap; } }
