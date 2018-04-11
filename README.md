@@ -1,5 +1,7 @@
-Prosta aplikacja do zaplanowania biegu. W planie sukcesywne ulepszanie.
+Prosta aplikacja do planowania biegu.
+More to come.
 
 ---------------------
 
-Simple app for planning your run. More to come.
+Simple app for planning your run.
+More to come.
