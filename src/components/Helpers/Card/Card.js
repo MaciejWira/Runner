@@ -22,7 +22,16 @@ class Card extends Component  {
                       intervalId: intervalId
                     })
                   }}
+                  onTouchStart={() => {
+                    const intervalId = setInterval(this.props.valueUp,100);
+                    this.setState({
+                      intervalId: intervalId
+                    })
+                  }}
                   onMouseUp={() => {
+                    if (this.state.intervalId) clearInterval(this.state.intervalId);
+                  }}
+                  onTouchEnd={() => {
                     if (this.state.intervalId) clearInterval(this.state.intervalId);
                   }}
                   onMouseLeave={() => {
@@ -39,7 +48,16 @@ class Card extends Component  {
                     intervalId: intervalId
                   })
                 }}
+                onTouchStart={() => {
+                  const intervalId = setInterval(this.props.valueDown,100);
+                  this.setState({
+                    intervalId: intervalId
+                  })
+                }}
                 onMouseUp={() => {
+                  if (this.state.intervalId) clearInterval(this.state.intervalId);
+                }}
+                onTouchEnd={() => {
                   if (this.state.intervalId) clearInterval(this.state.intervalId);
                 }}
                 onMouseLeave={() => {
